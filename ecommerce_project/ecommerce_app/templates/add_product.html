@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add product Page</title>
+</head>
+<body style="margin-left: 50px; margin-top: 50px;">
+    <form action="{% url 'add_product' %}" method="POST" name="add_product" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+        <h4>Add Product</h4>
+        {% if msg %}
+        <b style=" color: darkred;">{{msg}}</b>
+        {% endif %}
+        <tr>
+            <th><label for="name">Product Name</label></th>
+            <td><input type="text" placeholder="Name" name="name"></td>
+        </tr>       
+        <tr>
+            <th><label for="description">description</label></th>
+            <td><textarea placeholder="description"  name="description"></textarea></td>
+        </tr>
+        <tr>
+            <th><label for="price">Product price</label></th>
+            <td><input type="text" placeholder="price"  name="price"></td>
+        </tr>
+        <tr>
+            <th><label for="image">Image</label></th>
+            <td><input type="FILE" name="image"></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" name="action">Add <a href="{% url 'add_product' %}"></a></button>
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>

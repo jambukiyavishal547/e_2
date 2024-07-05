@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E Web</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+</style>
+</head>
+<body>
+    <form action="{% url 'product_list' %}" method="POST" enctype="multipart/form-data" >
+      {% csrf_token %}
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">WebSiteName</a>
+          </div>
+          <ul class="nav navbar-nav">
+              <ul class="dropdown-menu">
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+            <li><a href=" "><span class="glyphicon glyphicon-log-out"></span> {{msg}}</a></li>
+            </li>
+            <li><a href="{% url 'add_product' %}"><span class="glyphicon glyphicon-log-in"></span> Add Product</a></li>
+          </ul>
+        </div>
+      </nav>
+        <h2 style="text-align:center">Products </h2>
+        {% for i in products %}
+        <div class="card">
+        <img src="{{i.image.url}}" alt="{{i.image}}" height="200px" width="200px">
+        <h2>{{ i.name }}</h2>
+        <h5>{{ i.description }}</h5>
+        <h4><p class="price">Rs {{i.price}}</p></h4>
+        <h4><p class="price">Total Review {{i.num_reviews}}</p></h4>
+        <button type="button" name="action" value="edit">
+        <a href="{% url 'edit_product' pk=i.pk %}">Edit Product</a><br>
+        <a href="{% url 'add_review' pk=i.pk %}">Review</a><br>
+      </button>
+        </div>
+        {% endfor %}
+    </form>
+</body>
+</html>

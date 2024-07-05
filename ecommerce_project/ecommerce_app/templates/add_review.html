@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Review Page</title>
+</head>
+<body style="margin-left: 50px; margin-top: 50px;">
+    <form action="{% url 'add_review' pk=product.pk %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+        <tr></tr>
+        <h4>view Product</h4>
+        <tr></tr>
+        {% if msg %}
+        <b style=" color: darkred;">{{msg}}</b>
+        {% endif %}
+        <tr>
+            {% if request.user.is_authenticated %}
+            <th><label for="review">Review</label></th>
+            <td><textarea placeholder="Review" name="text"></textarea></td>
+            <td>
+                <button type="submit">Add review </button>
+            </td>
+        </tr>
+        {% endif %}
+        </tr>
+    </table>
+    </form>
+</body>
+</html>

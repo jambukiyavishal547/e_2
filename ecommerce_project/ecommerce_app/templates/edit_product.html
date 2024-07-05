@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add product Page</title>
+</head>
+<body style="margin-left: 50px; margin-top: 50px;">
+    <form action="{% url 'edit_product' pk=product.pk %}" method="POST" name="edit_product" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <table>
+        <tr></tr>
+        <h4>view Product</h4>
+        <tr></tr>
+        {% if msg %}
+        <b style=" color: darkred;">{{msg}}</b>
+        {% endif %}
+        <tr>
+            <th><label for="product_name">Product Name</label></th>
+            <td><input type="text" placeholder="Name" value="{{product.name}}" name="name"></td>
+        </tr>       
+        <tr>
+            <th><label for="description">description</label></th>
+            <td><textarea placeholder="description" value="{{product.description}}" name="description"></textarea></td>
+        </tr>
+        <tr>
+            <th><label for="product_price">Product price</label></th>
+            <td><input type="text" placeholder="price" value="{{product.price}}" name="price"></td>
+        </tr>
+        <tr>
+            <th><label for="product_image">Image</label></th>
+            <td><input type="file" value="image" name="image"></td>
+            <td>{{product.image}}</td>
+            
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" name="action">Edit<a href="{% url 'edit_product' pk=product.pk%}"></a></button>
+            </td>
+        </tr>
+        <div>
+        </div>
+    </table>
+    </form>
+</body>
+</html>
